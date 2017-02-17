@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CitiesViewController" customModule="WorldWeather" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="CitiesView" customModule="WorldWeather" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="NUx-rM-PKT">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EvO-NC-4ky">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="jnM-NM-Z0v"/>
+                        <outlet property="delegate" destination="-1" id="xmt-Ft-TRp"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="NUx-rM-PKT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="28m-sg-O6m"/>
+                <constraint firstItem="NUx-rM-PKT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BeK-Pf-498"/>
+                <constraint firstAttribute="bottom" secondItem="EvO-NC-4ky" secondAttribute="bottom" id="Ky3-io-2jK"/>
+                <constraint firstAttribute="trailing" secondItem="NUx-rM-PKT" secondAttribute="trailing" id="XKn-rD-7Yi"/>
+                <constraint firstItem="EvO-NC-4ky" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bbt-w4-1EA"/>
+                <constraint firstItem="EvO-NC-4ky" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cEN-Yo-A1B"/>
+                <constraint firstAttribute="trailing" secondItem="EvO-NC-4ky" secondAttribute="trailing" id="ngI-Yr-MjK"/>
+                <constraint firstAttribute="bottom" secondItem="NUx-rM-PKT" secondAttribute="bottom" id="utC-HC-83c"/>
+            </constraints>
+            <connections>
+                <outlet property="tableView" destination="EvO-NC-4ky" id="CqP-wd-Uuk"/>
+            </connections>
+            <point key="canvasLocation" x="-148" y="-150"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="BackgroundImage" width="540" height="960"/>
+    </resources>
+</document>
