@@ -17,7 +17,7 @@ class LoginView: UIView {
     
     func changeOnLogged(emailPlaceholder: String?) {
         self.emailTextField?.placeholder = emailPlaceholder
-        self.emailTextField?.text = ""
+        self.emailTextField?.text = TextFieldConst().cleanField
         self.passwordTextField?.textColor = UIColor.lightGray
         self.emailTextField?.isEnabled = false
         self.passwordTextField?.isEnabled = false
@@ -29,11 +29,11 @@ class LoginView: UIView {
     }
     
     func changeOnRegistration() {
-        self.emailTextField?.placeholder = "Please enter your Email"
-        self.emailTextField?.text = ""
-        self.passwordTextField?.placeholder = "Password"
+        self.emailTextField?.placeholder = TextFieldConst().email
+        self.emailTextField?.text = TextFieldConst().cleanField
+        self.passwordTextField?.placeholder = TextFieldConst().password
         self.passwordTextField?.textColor = UIColor.black
-        self.passwordTextField?.text = ""
+        self.passwordTextField?.text = TextFieldConst().cleanField
         self.emailTextField?.isEnabled = true
         self.passwordTextField?.isEnabled = true
         self.registerButton?.alpha = 0.5

@@ -11,6 +11,8 @@ import Firebase
 
 class CitiesViewController: UIViewController, ViewControllerRootView, UITableViewDataSource, UITableViewDelegate, AlertViewController {
     
+    // MARK: - Accessors
+    
     typealias RootViewType = CitiesView
     var ref = FIRDatabase.database().reference()
     var logged: Bool
@@ -47,46 +49,27 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
         super.viewDidLoad()
         self.saveToFirebase()
         self.settingNavigationBar()
-        self.settingTableView()
+        self.addRefreshControl()
+        self.registerCellWith(identifier: String(describing: CityCell.self))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.loadFromFirebase()
-    }
-    
-    // MARK: - UITableViewDataSource
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cities.count + 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = self.loadCell(for: tableView, with: String(describing: CityTextFieldCell.self))
-            
-            return cell!
-        } else {
-            let cell = self.loadCell(for: tableView, with: String(describing: CityCell.self)) as! CityCell
-            cell.fillWith(city: self.cities[indexPath.row - 1])
-            
-            return cell
-        }
     }
     
     // MARK: - NavigationBar Action
     
     @objc private func addCity() {
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = self.tableView?.cellForRow(at: indexPath) as? CityTextFieldCell
-        if cell?.cityTextField?.text != "" {
-            load(city: cell?.cityTextField?.text, for: self.user)
-            cell?.cityTextField?.text = ""
+        if self.cities.count <= 15 {
+            let text = self.rootView.cityTextField?.text
+            if text != "" {
+                load(city: text, for: self.user)
+                self.rootView.cityTextField?.text = ""
+            }
+        }else {
+            self.showAlertController(message: AlertControllerConst().citiesQty)
         }
     }
     
@@ -96,15 +79,8 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     
     // MARK: - Private
     
-    private func loadCell(for tableView: UITableView, with identifier: String) -> UITableViewCell? {
-        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: identifier)
-        }
-        
-        tableView.rowHeight = (cell?.contentView.frame.size.height)!
-        
-        return cell
+    private func showAlertController(message: String) {
+        self.present(self.alertViewController(message: message), animated: true, completion: nil)
     }
     
     private func registerCellWith(identifier: String) {
@@ -112,10 +88,13 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
                                  forCellReuseIdentifier: identifier)
     }
     
-    private func settingTableView() {
-        self.tableView?.contentInset.top = 60
-        self.registerCellWith(identifier: String(describing: CityTextFieldCell.self))
-        self.registerCellWith(identifier: String(describing: CityCell.self))
+    private func loadCell(for tableView: UITableView, with identifier: String) -> UITableViewCell? {
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: identifier)
+        }
+        
+        return cell
     }
     
     private func settingNavigationBar() {
@@ -128,24 +107,50 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     }
     
     private func addBarButtons() {
-        let rightImage = UIImage(named: "AddCityButton")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        let names = NavigationBarButtonName()
+        let rightImage = UIImage(named: names.rightButton)?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightImage,
                                                                  style: .plain,
                                                                  target: self,
                                                                  action: #selector(addCity))
         
-        let leftImage = UIImage(named: "BackButton")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        let leftImage = UIImage(named: names.leftButton)?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftImage,
                                                                 style: .plain,
                                                                 target: self,
                                                                 action: #selector(popViewController))
     }
-
+    
+    // MARK: - UIRefreshControl
+    
+    private func addRefreshControl() {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(refreshLoad), for: .valueChanged)
+        self.tableView?.refreshControl = refresh
+    }
+    
+    @objc private func refreshLoad() {
+        self.tableView?.refreshControl?.beginRefreshing()
+        var citiesID = [String]()
+        for city in self.cities {
+            if let id = city.id?.description {
+                citiesID.append(id)
+            }
+        }
+        
+        load(cities: citiesID, for: self.user)
+    }
+    
+    // MARK: - Firebase
+    
     private func saveToFirebase() {
         let login = self.user.email
         let password = self.user.key
         let cities = self.user.cities
-        let user = ["login": login!, "password": password!, "cities": cities!] as [String : Any]
+        let stringConst = StringConst()
+        let user = [stringConst.login: login!,
+                    stringConst.password: password!,
+                    stringConst.cities: cities!] as [String : Any]
         
         if self.logged == false {
             let ref = self.ref.child(login!)
@@ -156,13 +161,12 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
                         print(" CitiesViewController - Error - %@", error)
                     }
                 })
-            } 
+            }
         }
     }
     
     private func loadFromFirebase() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        self.ref.child(self.user.email!).child("cities").observe(FIRDataEventType.value, with: { (snapshot) in
+        self.ref.child(self.user.email!).child(StringConst().cities).observe(FIRDataEventType.value, with: { (snapshot) in
             var array = [City]()
             for child in snapshot.children {
                 array.append(City.createFrom(snapshot: child as! FIRDataSnapshot))
@@ -170,10 +174,28 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
             
             self.cities = array
             self.tableView?.reloadData()
+            self.tableView?.refreshControl?.endRefreshing()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.cities.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.loadCell(for: tableView, with: String(describing: CityCell.self)) as! CityCell
+        cell.fillWith(city: self.cities[indexPath.row])
+        
+        return cell
     }
     
     // MARK: - UITableViewDelegate
@@ -196,5 +218,5 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
             self.tableView?.reloadData()
         }
     }
-
+    
 }

@@ -10,31 +10,32 @@ import Foundation
 import Firebase
 
 func parse(json: Any, for user: User) {
+    let stringConst = StringConst()
     let json = json as? [String: Any]
-    let coord = json?["coord"] as? [String: Any]
-    let weather = json?["weather"] as? [[String: Any]]
-    let icon = weather?.first?["icon"] as? String
+    let coord = json?[stringConst.coord] as? [String: Any]
+    let weather = json?[stringConst.weather] as? [[String: Any]]
+    let icon = weather?.first?[stringConst.icon] as? String
     
-    let main = json?["main"] as? [String: Any]
-    let wind = json?["wind"] as? [String: Any]
-    let id = json?["id"] as? Int
-    let name = json?["name"] as? String
+    let main = json?[stringConst.main] as? [String: Any]
+    let wind = json?[stringConst.wind] as? [String: Any]
+    let id = json?[stringConst.id] as? Int
+    let name = json?[stringConst.name] as? String
     let ref = FIRDatabase.database().reference()
     let date = Date.currentStringDate()
     
-    let currentWeather = ["temp": main?["temp"],
-                          "temp_min": main?["temp_min"],
-                          "temp_max": main?["temp_max"],
-                          "pressure": main?["pressure"],
-                          "windSpeed": wind?["speed"],
-                          "icon": icon,
-                          "data": date]
+    let currentWeather = [stringConst.temp: main?[stringConst.temp],
+                          stringConst.temp_min: main?[stringConst.temp_min],
+                          stringConst.temp_max: main?[stringConst.temp_max],
+                          stringConst.pressure: main?[stringConst.pressure],
+                          stringConst.windSpeed: wind?[stringConst.speed],
+                          stringConst.icon: icon,
+                          stringConst.data: date]
     
-    let city = ["name": name!,
-                "id": id!,
-                "lon": coord?["lon"],
-                "lat": coord?["lat"],
-                "currentWeather": currentWeather]
+    let city = [stringConst.name: name!,
+                stringConst.id: id!,
+                stringConst.lon: coord?[stringConst.lon],
+                stringConst.lat: coord?[stringConst.lat],
+                stringConst.currentWeather: currentWeather]
     
-    ref.child(user.email!).child("cities").child(name!).setValue(city)
+    ref.child(user.email!).child(stringConst.cities).child(name!).setValue(city)
 }

@@ -21,14 +21,15 @@ struct City {
 
 extension City {
     static func createFrom(snapshot: FIRDataSnapshot) -> City {
-        let weatherSnapshot = snapshot.childSnapshot(forPath: "currentWeather")
+        let stringConst = StringConst()
+        let weatherSnapshot = snapshot.childSnapshot(forPath: stringConst.currentWeather)
         let currentWeather = Weather.createFrom(snapshot: weatherSnapshot)
         
         let value = snapshot.value as? NSDictionary
-        let id = value?["id"] as? Int
-        let name = value?["name"] as? String
-        let lon = value?["lon"] as? Double
-        let lat = value?["lat"] as? Double
+        let id = value?[stringConst.id] as? Int
+        let name = value?[stringConst.name] as? String
+        let lon = value?[stringConst.lon] as? Double
+        let lat = value?[stringConst.lat] as? Double
         let forecastWeather = [Weather]()
         let ref = snapshot.ref
        

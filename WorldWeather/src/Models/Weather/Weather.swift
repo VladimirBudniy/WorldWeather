@@ -31,13 +31,14 @@ extension Weather {
     
     static func createFrom(snapshot: FIRDataSnapshot) -> Weather {
         let value = snapshot.value as? NSDictionary
-        let temp = value?["temp"] as? Double
-        let temp_min = value?["temp_min"] as? Double
-        let temp_max = value?["temp_max"] as? Double
-        let pressure = value?["pressure"] as? Double
-        let windSpeed = value?["windSpeed"] as? Double
-        let icon = value?["icon"] as? String
-        let date = value?["data"] as? String
+        let stringConst = StringConst()
+        let temp = value?[stringConst.temp] as? Double
+        let temp_min = value?[stringConst.temp_min] as? Double
+        let temp_max = value?[stringConst.temp_max] as? Double
+        let pressure = value?[stringConst.pressure] as? Double
+        let windSpeed = value?[stringConst.windSpeed] as? Double
+        let icon = value?[stringConst.icon] as? String
+        let date = value?[stringConst.data] as? String
         let ref = snapshot.ref
         
         return Weather(temp: temp, temp_min: temp_min, temp_max: temp_max, pressure: pressure,

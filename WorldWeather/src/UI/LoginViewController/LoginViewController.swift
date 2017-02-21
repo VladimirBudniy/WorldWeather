@@ -35,46 +35,48 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
         if let user = firebaseAuth?.currentUser {
             let userName = user.email?.replacingOccurrences(of: ".", with: "_")
             self.ref.child(userName!).removeValue()
-            
-            user.delete { error in
+            user.delete { [weak self] error in
                 if error != nil {
-                    print(error!)
-                } else {
+                    if let messege = error?.localizedDescription {
+                        self?.showAlertController(message: messege)
+                        self?.rootView.passwordTextField?.text = ""
+                    }
                     do {
                         try firebaseAuth?.signOut()
-                        self.rootView.changeOnRegistration()
+                        self?.rootView.changeOnRegistration()
                     } catch let signOutError as NSError {
                         print ("Error signing out: %@", signOutError)
                     }
                 }
             }
+            
+            self.rootView.changeOnRegistration()
         }
     }
-
+    
     @IBAction func onRegistrationButton(_ sender: Any) {
         let view = self.rootView
         let email = view.emailTextField?.text
         let password = view.passwordTextField?.text
         FIRAuth.auth()?.createUser(withEmail: email!, password: password!) { [weak self] (user, error) in
-            self?.user = user
-            let controller = CitiesViewController(user: user, logged: false)
-            self?.navigationController?.pushViewController(controller, animated: true)
+            if error != nil {
+                if let messege = error?.localizedDescription {
+                    self?.showAlertController(message: messege)
+                    self?.rootView.passwordTextField?.text = ""
+                }
+            } else {
+                self?.user = user
+                let controller = CitiesViewController(user: user, logged: false)
+                self?.navigationController?.pushViewController(controller, animated: true)
+                
+                view.changeOnLogged(emailPlaceholder: view.emailTextField?.text)
+            }
         }
-        
-        view.changeOnLogged(emailPlaceholder: view.emailTextField?.text)
     }
     
     @IBAction func onSignInButton(_ sender: Any) {
-        let view = self.rootView
-        let email = view.emailTextField?.placeholder?.replacingOccurrences(of: ".", with: "_")
-        let password = view.passwordTextField?.text
-        
-        FIRAuth.auth()?.createUser(withEmail: email!, password: password!) { [weak self] (user, error) in
-            if error != nil {
-                let controller = CitiesViewController(user: self?.user, logged: false)
-                self?.navigationController?.pushViewController(controller, animated: true)
-            }
-        }
+        let controller = CitiesViewController(user: self.user, logged: true)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Private
@@ -84,11 +86,8 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
         if currentUser != nil {
             self.user = currentUser
             self.rootView.changeOnLogged(emailPlaceholder: currentUser?.email)
-            let controller = CitiesViewController(user: currentUser, logged: false)
+            let controller = CitiesViewController(user: currentUser, logged: true)
             self.navigationController?.pushViewController(controller, animated: true)
-            
-            
-//            self.onSignInButton(Any.self)
         }
     }
     
@@ -99,13 +98,7 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
     }
     
     private func showAlertController(message: String) {
-        let alertController = alertViewControllerWith(title: nil,
-                                                      message: message,
-                                                      preferredStyle: UIAlertControllerStyle.alert,
-                                                      actionTitle: "Ok",
-                                                      style: UIAlertActionStyle.default,
-                                                      handler: nil)
-        self.present(alertController, animated: true, completion: nil)
+        self.present(self.alertViewController(message: message), animated: true, completion: nil)
     }
     
     // MARK: - Validation

@@ -18,9 +18,10 @@ struct User {
 
 extension User {
     static func createFrom(snapshot: FIRDataSnapshot) -> User {
+        let stringConst = StringConst()
         let value = snapshot.value as? NSDictionary
-        let email = value?["login"] as? String
-        let key = value?["password"] as? String
+        let email = value?[stringConst.login] as? String
+        let key = value?[stringConst.password] as? String
         let cities = [City]()
         let ref = snapshot.ref
         

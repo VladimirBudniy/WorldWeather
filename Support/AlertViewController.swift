@@ -17,11 +17,11 @@ public extension AlertViewController {
     
     var alertViewController: UIAlertController {
         let alertView = self.alertViewControllerWith(title: nil,
-            message: "Data is not saved!",
-            preferredStyle: UIAlertControllerStyle.alert,
-            actionTitle: "Yes",
-            style: UIAlertActionStyle.default,
-            handler: nil)
+                                                     message: "Data is not saved!",
+                                                     preferredStyle: UIAlertControllerStyle.alert,
+                                                     actionTitle: "Yes",
+                                                     style: UIAlertActionStyle.default,
+                                                     handler: nil)
         
         return alertView
     }
@@ -41,5 +41,14 @@ public extension AlertViewController {
         alertView.addAction(alertAction)
         
         return alertView
+    }
+    
+    func alertViewController(message: String) -> UIAlertController {
+        return alertViewControllerWith(title: nil,
+                                       message: message,
+                                       preferredStyle: UIAlertControllerStyle.alert,
+                                       actionTitle: "Ok",
+                                       style: UIAlertActionStyle.default,
+                                       handler: nil)
     }
 }
