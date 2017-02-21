@@ -12,7 +12,7 @@ import Firebase
 class CitiesViewController: UIViewController, ViewControllerRootView, UITableViewDataSource, UITableViewDelegate, AlertViewController {
     
     // MARK: - Accessors
-    
+
     typealias RootViewType = CitiesView
     var ref = FIRDatabase.database().reference()
     var logged: Bool
@@ -29,7 +29,6 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     init(user: FIRUser?, logged: Bool) {
         let login = user?.email?.replacingOccurrences(of: ".", with: "_")
         let user = User(email: login, key: user?.uid, cities: [City](), ref: self.ref)
-        
         self.user = user
         self.logged = logged
         if let citeis = user.cities {
@@ -65,7 +64,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
         if self.cities.count <= 15 {
             let text = self.rootView.cityTextField?.text
             if text != "" {
-                load(city: text, for: self.user)
+                load(city: text, for: self.user, errorBlock: loadError)
                 self.rootView.cityTextField?.text = ""
             }
         }else {
@@ -78,6 +77,12 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     }
     
     // MARK: - Private
+    
+    private func loadError(error: Error) {
+        self.tableView?.refreshControl?.endRefreshing()
+        let message = error.localizedDescription
+        self.showAlertController(message: message)
+    }
     
     private func showAlertController(message: String) {
         self.present(self.alertViewController(message: message), animated: true, completion: nil)
@@ -138,7 +143,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
             }
         }
         
-        load(cities: citiesID, for: self.user)
+        load(cities: citiesID, for: self.user, errorBlock: loadError)
     }
     
     // MARK: - Firebase

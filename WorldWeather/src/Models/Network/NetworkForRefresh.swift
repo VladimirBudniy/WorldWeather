@@ -10,7 +10,7 @@ import Foundation
 
 var refreshPath = "http://api.openweathermap.org/data/2.5/group?id=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
 
-func load(cities: [String]?, for user: User) {
+func load(cities: [String]?, for user: User, errorBlock: @escaping error) {
     if let cities = cities {
         let cities = cities.joined(separator: ",").addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: String.localizedStringWithFormat(refreshPath, cities))
@@ -21,9 +21,9 @@ func load(cities: [String]?, for user: User) {
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if error != nil {
                 print("loading error !!!!!", error!)
-                //            DispatchQueue.main.async {
-                //                errorBlock(error!)
-                //            }
+                DispatchQueue.main.async {
+                    errorBlock(error!)
+                }
             }
             if error == nil {
                 do {
@@ -34,9 +34,9 @@ func load(cities: [String]?, for user: User) {
                         }
                     }
                 } catch {
-                    //                DispatchQueue.main.async {
-                    //                    errorBlock(error)
-                    //                }
+                    DispatchQueue.main.async {
+                        errorBlock(error)
+                    }
                 }
             }
         })
