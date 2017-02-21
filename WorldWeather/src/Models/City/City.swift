@@ -24,7 +24,6 @@ extension City {
         let stringConst = StringConst()
         let weatherSnapshot = snapshot.childSnapshot(forPath: stringConst.currentWeather)
         let currentWeather = Weather.createFrom(snapshot: weatherSnapshot)
-        
         let value = snapshot.value as? NSDictionary
         let id = value?[stringConst.id] as? Int
         let name = value?[stringConst.name] as? String

@@ -9,5 +9,6 @@
 import UIKit
 
 class ForecastWeatherView: UIView {
-
+    @IBOutlet var tableView: UITableView?
+    
 }

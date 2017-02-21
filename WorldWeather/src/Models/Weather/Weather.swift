@@ -28,7 +28,6 @@ extension Weather {
                        date: nil, ref: nil)
     }
     
-    
     static func createFrom(snapshot: FIRDataSnapshot) -> Weather {
         let value = snapshot.value as? NSDictionary
         let stringConst = StringConst()

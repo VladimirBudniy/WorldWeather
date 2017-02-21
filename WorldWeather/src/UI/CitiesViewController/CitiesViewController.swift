@@ -207,9 +207,9 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        //        let city = self.cities?[indexPath.row]
-        //        city.ref.updateChildValues(["developer": !employee.developer!])
-        //        self.tableView?.reloadData()
+        let controller = ForecastWeatherViewController()
+        controller.city = self.cities[indexPath.row]
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
