@@ -19,12 +19,23 @@ class CurrentWeatherCell: UITableViewCell {
     @IBOutlet var dateLabel: UILabel?
     @IBOutlet var pressureLabel: UILabel?
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     func fillWith(weather: Weather?) {
+        self.mainImageView?.image = UIImage(named: (weather?.icon)!)
+        self.windImageView?.image = UIImage(named: "905")
         
+        if (weather?.temp)! < 10.0 {
+            self.tempImageView?.image = UIImage(named: "903")
+        } else {
+            self.tempImageView?.image = UIImage(named: "904")
+        }
+        
+        self.tempLabel?.text = (weather?.temp?.description)! + " \u{00B0}C"
+        self.windLabel?.text = (weather?.windSpeed?.description)! + " m/s"
+        self.dateLabel?.text = weather?.date
+        self.pressureLabel?.text = (weather?.pressure?.description)! + " mb"
     }
 }

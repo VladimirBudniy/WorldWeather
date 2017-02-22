@@ -29,6 +29,7 @@ class CityCell: UITableViewCell {
         }
         
         self.weatherImageView?.image = UIImage(named: (weather?.icon)!)
+        self.windImage?.image = UIImage(named: "905")
         self.tempLabel?.text = (weather?.temp?.description)! + " \u{00B0}C"
         self.windSpeedLabel?.text = (weather?.windSpeed?.description)! + " m/s"
     }

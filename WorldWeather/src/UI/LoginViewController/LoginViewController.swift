@@ -86,8 +86,7 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
         if currentUser != nil {
             self.user = currentUser
             self.rootView.changeOnLogged(emailPlaceholder: currentUser?.email)
-            let controller = CitiesViewController(user: currentUser, logged: true)
-            self.navigationController?.pushViewController(controller, animated: true)
+            // add alert controller "продолжить как .... "
         }
     }
     
