@@ -49,5 +49,7 @@ struct StringConst {
     let data = "data"
     let lon = "lon"
     let lat = "lat"
+    let dtTxt = "dt_txt"
     let currentWeather = "currentWeather"
+    let forecastWeather = "forecastWeather"
 }

@@ -11,7 +11,7 @@ import Foundation
 var path = "http://api.openweathermap.org/data/2.5/weather?q=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
 typealias error = (Error) -> ()
 
-func load(city: String?, for user: User, errorBlock: @escaping error) {
+func loadWeather(for city: String?, for user: User, errorBlock: @escaping error) {
     if let city = city {
         let city = city.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: String.localizedStringWithFormat(path, city))

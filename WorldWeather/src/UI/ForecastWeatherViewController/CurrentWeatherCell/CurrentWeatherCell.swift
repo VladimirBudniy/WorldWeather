@@ -40,7 +40,7 @@ class CurrentWeatherCell: UITableViewCell {
         self.tempMinLabel?.text = (weather?.temp_min?.description)! + " \u{00B0}C"
         self.tempMaxLabel?.text = (weather?.temp_max?.description)! + " \u{00B0}C"
         self.windLabel?.text = (weather?.windSpeed?.description)! + " m/s"
-        self.dateLabel?.text = weather?.date
+        self.dateLabel?.text = Date.currentStringDate()
         self.pressureLabel?.text = (weather?.pressure?.description)! + " mb"
     }
 }

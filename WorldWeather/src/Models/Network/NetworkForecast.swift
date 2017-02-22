@@ -10,9 +10,9 @@ import Foundation
 
 var forecastPath = "http://api.openweathermap.org/data/2.5/forecast?id=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
 
-func load(cityId: String?, for user: User, errorBlock: @escaping error) {
-    if let cityId = cityId {
-        let ID = cityId.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+func forecastWeather(for city: City?, errorBlock: @escaping error) {
+    if let cityId = city?.id {
+        let ID = cityId.description.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: String.localizedStringWithFormat(forecastPath, ID))
         let request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData)
         let config = URLSessionConfiguration.default
@@ -29,9 +29,7 @@ func load(cityId: String?, for user: User, errorBlock: @escaping error) {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String: Any]
                     if let JSON = json?["list"] as? [[String: Any]] {
-                        for item in JSON {
-                            parse(json: item, for: user)
-                        }
+                        parse(json: JSON, for: city)
                     }
                 } catch {
                     DispatchQueue.main.async {

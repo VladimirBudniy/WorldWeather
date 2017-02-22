@@ -46,7 +46,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.saveToFirebase()
+        self.saveUserToFirebase()
         self.settingNavigationBar()
         self.addRefreshControl()
         self.registerCellWith(identifier: String(describing: CityCell.self))
@@ -64,7 +64,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
         if self.cities.count <= 15 {
             let text = self.rootView.cityTextField?.text
             if text != "" {
-                load(city: text, for: self.user, errorBlock: loadError)
+                loadWeather(for: text, for: self.user, errorBlock: loadError)
                 self.rootView.cityTextField?.text = ""
             }
         }else {
@@ -143,12 +143,12 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
             }
         }
         
-        load(cities: citiesID, for: self.user, errorBlock: loadError)
+        refreshWeather(in: citiesID, for: self.user, errorBlock: loadError)
     }
     
     // MARK: - Firebase
     
-    private func saveToFirebase() {
+    private func saveUserToFirebase() {
         let login = self.user.email
         let password = self.user.key
         let cities = self.user.cities

@@ -9,7 +9,7 @@
 import UIKit
 
 class ForecastCell: UITableViewCell {
-
+    @IBOutlet var separateView: UIView?
     @IBOutlet var dateLabel: UILabel?
     @IBOutlet var timeLabel: UILabel?
     @IBOutlet var tempImageView: UIImageView?
@@ -23,8 +23,17 @@ class ForecastCell: UITableViewCell {
     }
 
     func fillWith(weather: Weather?) {
-//        self.dateLabel?.text = 
-//        self.timeLabel?.text = 
+        let dataForDate = weather?.date?.components(separatedBy: " ")
+        self.dateLabel?.text = Date.convertDateString(dateString: dataForDate?[0])
+        
+        let time = Date.convertTimeString(timeString: dataForDate?[1])
+        self.timeLabel?.text = time
+        
+        if time == "00:00" {
+            self.separateView?.alpha = 1
+        } else {
+            self.separateView?.alpha = 0
+        }
         
         if (weather?.temp)! < 10.0 {
             self.tempImageView?.image = UIImage(named: "903")

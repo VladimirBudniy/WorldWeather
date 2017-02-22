@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ForecastWeatherViewController: UIViewController, ViewControllerRootView {
+class ForecastWeatherViewController: UIViewController, ViewControllerRootView, AlertViewController, UITableViewDataSource, UITableViewDelegate {
     
     typealias RootViewType = ForecastWeatherView
     var city: City?
@@ -23,12 +23,13 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView {
         super.viewDidLoad()
         self.settingNavigationBar()
         self.addRefreshControl()
-        settingTableView()
+        self.settingTableView()
+        self.loadFromFirebase()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        forecastWeather(for: self.city, errorBlock: loadError)
     }
     
     // MARK: - NavigationBar Action
@@ -44,9 +45,8 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView {
                                  forCellReuseIdentifier: identifier)
     }
     
-    
     private func settingTableView() {
-        self.tableView?.contentInset.top = 60
+//        self.tableView?.contentInset.top = 60
         self.registerCellWith(identifier: String(describing: CurrentWeatherCell.self))
         self.registerCellWith(identifier: String(describing: ForecastCell.self))
     }
@@ -81,19 +81,21 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView {
                                                                 action: #selector(popViewController))
     }
     
+    private func loadError(error: Error) {
+        self.tableView?.refreshControl?.endRefreshing()
+        let message = error.localizedDescription
+        self.showAlertController(message: message)
+    }
+    
+    private func showAlertController(message: String) {
+        self.present(self.alertViewController(message: message), animated: true, completion: nil)
+    }
+    
     // MARK: - Firebase
     
-    private func saveToFirebase() {
-        let ref = self.city?.ref.child("forecastWeather")
-        ref?.setValue(self.weathers, withCompletionBlock: { success in
-            if let error = success.0 {
-                print(" CitiesViewController - Error - %@", error)
-            }
-        })
-    } /////////////////////////////////////////////////////////////////////////////////////
-
     private func loadFromFirebase() {
-        self.city?.ref.child("forecastWeather").observe(FIRDataEventType.value, with: { (snapshot) in
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.city?.ref.child(StringConst().forecastWeather).observe(FIRDataEventType.value, with: { (snapshot) in
             var array = [Weather]()
             for child in snapshot.children {
                 array.append(Weather.createFrom(snapshot: child as! FIRDataSnapshot))

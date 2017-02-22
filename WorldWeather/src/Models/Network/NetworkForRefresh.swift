@@ -10,7 +10,7 @@ import Foundation
 
 var refreshPath = "http://api.openweathermap.org/data/2.5/group?id=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
 
-func load(cities: [String]?, for user: User, errorBlock: @escaping error) {
+func refreshWeather(in cities: [String]?, for user: User, errorBlock: @escaping error) {
     if let cities = cities {
         let cities = cities.joined(separator: ",").addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: String.localizedStringWithFormat(refreshPath, cities))
