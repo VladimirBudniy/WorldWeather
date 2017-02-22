@@ -54,7 +54,6 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.loadFromFirebase()
     }
     
@@ -144,6 +143,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
         }
         
         refreshWeather(in: citiesID, for: self.user, errorBlock: loadError)
+        self.tableView?.refreshControl?.endRefreshing()
     }
     
     // MARK: - Firebase
@@ -159,18 +159,16 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
         
         if self.logged == false {
             let ref = self.ref.child(login!)
-            let userName = ref.description().components(separatedBy: "/").last?.replacingOccurrences(of: "%40", with: "@")
-            if userName != login?.description {
-                ref.setValue(user, withCompletionBlock: { success in
-                    if let error = success.0 {
-                        print(" CitiesViewController - Error - %@", error)
-                    }
-                })
-            }
+            ref.setValue(user, withCompletionBlock: { success in
+                if let error = success.0 {
+                    print(" CitiesViewController - Error - %@", error)
+                }
+            })
         }
     }
     
     private func loadFromFirebase() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.ref.child(self.user.email!).child(StringConst().cities).observe(FIRDataEventType.value, with: { (snapshot) in
             var array = [City]()
             for child in snapshot.children {
@@ -179,7 +177,6 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
             
             self.cities = array
             self.tableView?.reloadData()
-            self.tableView?.refreshControl?.endRefreshing()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }) { (error) in
             print(error.localizedDescription)

@@ -35,7 +35,8 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
         if let user = firebaseAuth?.currentUser {
             let userName = user.email?.replacingOccurrences(of: ".", with: "_")
             self.ref.child(userName!).removeValue()
-            user.delete { [weak self] error in
+            
+            user.delete(completion: { [weak self] error in
                 if error != nil {
                     if let messege = error?.localizedDescription {
                         self?.showAlertController(message: messege)
@@ -47,10 +48,10 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
                     } catch let signOutError as NSError {
                         print ("Error signing out: %@", signOutError)
                     }
+                } else {
+                    self?.rootView.changeOnRegistration()
                 }
-            }
-            
-            self.rootView.changeOnRegistration()
+            })
         }
     }
     
@@ -58,20 +59,31 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
         let view = self.rootView
         let email = view.emailTextField?.text
         let password = view.passwordTextField?.text
-        FIRAuth.auth()?.createUser(withEmail: email!, password: password!) { [weak self] (user, error) in
-            if error != nil {
-                if let messege = error?.localizedDescription {
-                    self?.showAlertController(message: messege)
-                    self?.rootView.passwordTextField?.text = ""
-                }
-            } else {
+        let auth = FIRAuth.auth()
+        
+        auth?.signIn(withEmail: email!, password: password!, completion: { [weak self] (user, error) in
+            if let user = user {
                 self?.user = user
-                let controller = CitiesViewController(user: user, logged: false)
-                self?.navigationController?.pushViewController(controller, animated: true)
+                self?.loadWithUser(user: user, logged: true)
                 
                 view.changeOnLogged(emailPlaceholder: view.emailTextField?.text)
+            } else {
+                FIRAuth.auth()?.createUser(withEmail: email!, password: password!) { [weak self] (user, error) in
+                    if let user = user {
+                        self?.user = user
+                        self?.loadWithUser(user: user, logged: false)
+                        
+                        view.changeOnLogged(emailPlaceholder: view.emailTextField?.text)
+                    } else {
+                        self?.showAlertController(message: "Error")
+                    }
+                }
             }
-        }
+            
+            if error != nil {
+                self?.showAlertController(message: "Error")
+            }
+        })
     }
     
     @IBAction func onSignInButton(_ sender: Any) {
@@ -81,6 +93,12 @@ class LoginViewController: UIViewController, ViewControllerRootView, UITextField
     
     // MARK: - Private
 
+    private func loadWithUser(user: FIRUser?, logged: Bool) {
+        self.user = user
+        let controller = CitiesViewController(user: user, logged: logged)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     private func checkCurrentUser() {
         let currentUser = FIRAuth.auth()?.currentUser
         if currentUser != nil {

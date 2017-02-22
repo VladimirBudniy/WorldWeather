@@ -22,7 +22,6 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
     override func viewDidLoad() {
         super.viewDidLoad()
         self.settingNavigationBar()
-        self.addRefreshControl()
         self.settingTableView()
         self.loadFromFirebase()
     }
@@ -46,7 +45,6 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
     }
     
     private func settingTableView() {
-//        self.tableView?.contentInset.top = 60
         self.registerCellWith(identifier: String(describing: CurrentWeatherCell.self))
         self.registerCellWith(identifier: String(describing: ForecastCell.self))
     }
@@ -94,8 +92,8 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
     // MARK: - Firebase
     
     private func loadFromFirebase() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.city?.ref.child(StringConst().forecastWeather).observe(FIRDataEventType.value, with: { (snapshot) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             var array = [Weather]()
             for child in snapshot.children {
                 array.append(Weather.createFrom(snapshot: child as! FIRDataSnapshot))
@@ -103,31 +101,10 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
             
             self.weathers = array
             self.tableView?.reloadData()
-            self.tableView?.refreshControl?.endRefreshing()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }) { (error) in
             print(error.localizedDescription)
         }
-    }
-    
-    // MARK: - UIRefreshControl
-    
-    private func addRefreshControl() {
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(refreshLoad), for: .valueChanged)
-        // self.tableView?.refreshControl = refresh
-    }
-    
-    @objc private func refreshLoad() {
-        //        self.tableView?.refreshControl?.beginRefreshing()
-        //        var citiesID = [String]()
-        //        for city in self.cities {
-        //            if let id = city.id?.description {
-        //                citiesID.append(id)
-        //            }
-        //        }
-        //
-        //        load(cities: citiesID, for: self.user, errorBlock: loadError)
     }
     
     // MARK: - UITableViewDataSource

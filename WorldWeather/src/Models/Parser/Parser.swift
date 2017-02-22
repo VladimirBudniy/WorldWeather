@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import UIKit
 
 func parse(json: Any, for user: User?) {
     let stringConst = StringConst()
@@ -38,6 +39,7 @@ func parse(json: Any, for user: User?) {
                 stringConst.currentWeather: currentWeather]
     
     ref.child((user?.email)!).child(stringConst.cities).child(name!).setValue(city)
+    UIApplication.shared.isNetworkActivityIndicatorVisible = false
 }
 
 func parse(json: [[String: Any]] , for city: City?) {
