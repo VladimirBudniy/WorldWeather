@@ -18,12 +18,15 @@ class CurrentWeatherCell: UITableViewCell {
     @IBOutlet var windLabel: UILabel?
     @IBOutlet var dateLabel: UILabel?
     @IBOutlet var pressureLabel: UILabel?
+    @IBOutlet var tempMinLabel: UILabel?
+    @IBOutlet var tempMaxLabel: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func fillWith(weather: Weather?) {
+    func fillWith(weather: Weather?, city: City?) {
+        self.cityNameLabel?.text = city?.name
         self.mainImageView?.image = UIImage(named: (weather?.icon)!)
         self.windImageView?.image = UIImage(named: "905")
         
@@ -34,6 +37,8 @@ class CurrentWeatherCell: UITableViewCell {
         }
         
         self.tempLabel?.text = (weather?.temp?.description)! + " \u{00B0}C"
+        self.tempMinLabel?.text = (weather?.temp_min?.description)! + " \u{00B0}C"
+        self.tempMaxLabel?.text = (weather?.temp_max?.description)! + " \u{00B0}C"
         self.windLabel?.text = (weather?.windSpeed?.description)! + " m/s"
         self.dateLabel?.text = weather?.date
         self.pressureLabel?.text = (weather?.pressure?.description)! + " mb"

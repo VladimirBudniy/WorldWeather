@@ -141,7 +141,7 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = self.loadCell(for: tableView, with: String(describing: CurrentWeatherCell.self)) as? CurrentWeatherCell
-            cell?.fillWith(weather: self.weathers[indexPath.row])
+            cell?.fillWith(weather: self.weathers[indexPath.row], city: self.city)
             
             return cell!
         } else {
