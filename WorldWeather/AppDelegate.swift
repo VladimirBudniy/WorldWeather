@@ -13,6 +13,12 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
+    
+    // for test !!!
+    // login - bob.va@gmail.com
+    // password - 123456
+
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FIRApp.configure()
         let window = UIWindow(frame: UIScreen.main.bounds)
