@@ -63,7 +63,7 @@
                     <size key="titleShadowOffset" width="1" height="1"/>
                     <state key="normal" title="Sign In">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="titleShadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onSignInButton:" destination="-1" eventType="touchUpInside" id="Jag-xc-rDN"/>

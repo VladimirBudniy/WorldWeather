@@ -45,23 +45,25 @@ func parse(json: [[String: Any]]?, for city: City?) {
     var weathers = [[String: Any]]()
     let ref = city?.ref
     let stringConst = StringConst()
-    for item in json {
-        let weather = item[stringConst.weather] as? [[String: Any]]
-        let icon = weather?.first?[stringConst.icon] as? String
-        let main = item[stringConst.main] as? [String: Any]
-        let wind = item[stringConst.wind] as? [String: Any]
-        let date = item[stringConst.dtTxt] as? String
-
-        let currentWeather = [stringConst.temp: main?[stringConst.temp],
-                              stringConst.temp_min: main?[stringConst.temp_min],
-                              stringConst.temp_max: main?[stringConst.temp_max],
-                              stringConst.pressure: main?[stringConst.pressure],
-                              stringConst.windSpeed: wind?[stringConst.speed],
-                              stringConst.icon: icon,
-                              stringConst.data: date]
-        weathers.append(currentWeather)
+    if let json = json {
+        for item in json {
+            let weather = item[stringConst.weather] as? [[String: Any]]
+            let icon = weather?.first?[stringConst.icon] as? String
+            let main = item[stringConst.main] as? [String: Any]
+            let wind = item[stringConst.wind] as? [String: Any]
+            let date = item[stringConst.dtTxt] as? String
+            
+            let currentWeather = [stringConst.temp: main?[stringConst.temp],
+                                  stringConst.temp_min: main?[stringConst.temp_min],
+                                  stringConst.temp_max: main?[stringConst.temp_max],
+                                  stringConst.pressure: main?[stringConst.pressure],
+                                  stringConst.windSpeed: wind?[stringConst.speed],
+                                  stringConst.icon: icon,
+                                  stringConst.data: date]
+            weathers.append(currentWeather)
+        }
     }
-    
+
     ref?.child(stringConst.forecastWeather).setValue(weathers)
 }
 
