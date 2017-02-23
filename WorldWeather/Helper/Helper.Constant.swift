@@ -17,10 +17,17 @@ struct NavigationBarButtonName {
     let rightButton = "AddCityButton"
 }
 
+struct Path {
+    let loadCityPath = "http://api.openweathermap.org/data/2.5/weather?q=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
+    let refreshPath = "http://api.openweathermap.org/data/2.5/group?id=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
+    let forecastPath = "http://api.openweathermap.org/data/2.5/forecast?id=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
+}
+
 struct AlertControllerConst {
     let emailMessage = "Please check your email"
     let whitespaceMessage = "Please remove whitespace"
     let citiesQty = "The quantity of countries can't be more than 15 pcs!"
+    let cityNotFound = "Error: Not found city"
 }
 
 struct TextFieldConst {

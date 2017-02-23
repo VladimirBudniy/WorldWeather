@@ -43,8 +43,8 @@ public extension AlertViewController {
         return alertView
     }
     
-    func alertViewController(message: String) -> UIAlertController {
-        return alertViewControllerWith(title: nil,
+    func alertViewController(title: String? = nil, message: String) -> UIAlertController {
+        return alertViewControllerWith(title: title,
                                        message: message,
                                        preferredStyle: UIAlertControllerStyle.alert,
                                        actionTitle: "Ok",

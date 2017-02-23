@@ -7,20 +7,19 @@
 //
 
 import Foundation
-
-var forecastPath = "http://api.openweathermap.org/data/2.5/forecast?id=%@&units=metric&APPID=a755c475976f0c028f179d7f425c2a6a"
+import UIKit
 
 func forecastWeather(for city: City?, errorBlock: @escaping error) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
     if let cityId = city?.id {
         let ID = cityId.description.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-        let url = URL(string: String.localizedStringWithFormat(forecastPath, ID))
+        let url = URL(string: String.localizedStringWithFormat(Path().forecastPath, ID))
         let request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData)
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if error != nil {
-                print("loading error !!!!!", error!)
                 DispatchQueue.main.async {
                     errorBlock(error!)
                 }

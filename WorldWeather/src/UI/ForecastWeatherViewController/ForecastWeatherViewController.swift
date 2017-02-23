@@ -93,7 +93,6 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
     
     private func loadFromFirebase() {
         self.city?.ref.child(StringConst().forecastWeather).observe(FIRDataEventType.value, with: { (snapshot) in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             var array = [Weather]()
             for child in snapshot.children {
                 array.append(Weather.createFrom(snapshot: child as! FIRDataSnapshot))

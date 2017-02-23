@@ -10,9 +10,8 @@ import Foundation
 import Firebase
 import UIKit
 
-func parse(json: Any, for user: User?) {
+func parse(json: [String: Any]?, for user: User?) {
     let stringConst = StringConst()
-    let json = json as? [String: Any]
     let coord = json?[stringConst.coord] as? [String: Any]
     let weather = json?[stringConst.weather] as? [[String: Any]]
     let icon = weather?.first?[stringConst.icon] as? String
@@ -42,7 +41,7 @@ func parse(json: Any, for user: User?) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
 }
 
-func parse(json: [[String: Any]] , for city: City?) {
+func parse(json: [[String: Any]]?, for city: City?) {
     var weathers = [[String: Any]]()
     let ref = city?.ref
     let stringConst = StringConst()

@@ -83,8 +83,8 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
         self.showAlertController(message: message)
     }
     
-    private func showAlertController(message: String) {
-        self.present(self.alertViewController(message: message), animated: true, completion: nil)
+    private func showAlertController(title: String? = nil, message: String) {
+        self.present(self.alertViewController(title: title, message: message), animated: true, completion: nil)
     }
     
     private func registerCellWith(identifier: String) {
