@@ -28,30 +28,34 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjZ-ZH-6ic">
                         <rect key="frame" x="2" y="2" width="316" height="46"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmq-Vs-Tto">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmq-Vs-Tto">
                                 <rect key="frame" x="5" y="7" width="65" height="14"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="4Fm-qO-Gtr"/>
                                     <constraint firstAttribute="height" constant="14" id="Jzs-hE-VFZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcG-ux-rEN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcG-ux-rEN">
                                 <rect key="frame" x="5" y="22" width="65" height="14"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="FfK-zN-I2z"/>
                                     <constraint firstAttribute="width" constant="65" id="LUf-m3-dfv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="02n" translatesAutoresizingMaskIntoConstraints="NO" id="rcd-v2-6ux">
-                                <rect key="frame" x="267" y="2" width="45" height="45"/>
+                                <rect key="frame" x="260" y="2" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="1LM-bv-KBC"/>
                                     <constraint firstAttribute="height" constant="45" id="Hhr-Eo-ZBg"/>
@@ -67,9 +71,11 @@
                                             <constraint firstAttribute="width" constant="50" id="MYe-qC-hdh"/>
                                             <constraint firstAttribute="height" constant="21" id="dg5-vM-tvd"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="905" translatesAutoresizingMaskIntoConstraints="NO" id="dDB-Jd-HQI">
                                         <rect key="frame" x="98" y="8" width="30" height="30"/>
@@ -85,9 +91,11 @@
                                             <constraint firstAttribute="height" constant="21" id="Kkx-wF-n6R"/>
                                             <constraint firstAttribute="width" constant="55" id="e9x-Xu-fri"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="903" translatesAutoresizingMaskIntoConstraints="NO" id="QcZ-61-eS2">
                                         <rect key="frame" x="5" y="8" width="30" height="30"/>
@@ -115,7 +123,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wcG-ux-rEN" firstAttribute="top" secondItem="gmq-Vs-Tto" secondAttribute="bottom" constant="1" id="7aS-ab-cJg"/>
-                            <constraint firstAttribute="trailing" secondItem="rcd-v2-6ux" secondAttribute="trailing" constant="4" id="LW5-Hi-NWj"/>
+                            <constraint firstAttribute="trailing" secondItem="rcd-v2-6ux" secondAttribute="trailing" constant="11" id="LW5-Hi-NWj"/>
                             <constraint firstItem="gmq-Vs-Tto" firstAttribute="top" secondItem="VjZ-ZH-6ic" secondAttribute="top" constant="7" id="YgK-eO-20b"/>
                             <constraint firstItem="rcd-v2-6ux" firstAttribute="top" secondItem="VjZ-ZH-6ic" secondAttribute="top" constant="2" id="cL2-BE-Uhm"/>
                             <constraint firstItem="gmq-Vs-Tto" firstAttribute="leading" secondItem="VjZ-ZH-6ic" secondAttribute="leading" constant="5" id="qaO-oE-ba9"/>

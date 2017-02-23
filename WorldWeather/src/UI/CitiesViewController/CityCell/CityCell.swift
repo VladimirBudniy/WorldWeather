@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import QuartzCore
 
 class CityCell: UITableViewCell {
-
+    
     @IBOutlet var cityName: UILabel?
-
     @IBOutlet var tempImageView: UIImageView?
     @IBOutlet var weatherImageView: UIImageView?
     @IBOutlet var tempLabel: UILabel?
@@ -28,8 +28,13 @@ class CityCell: UITableViewCell {
             self.tempImageView?.image = UIImage(named: "904")
         }
         
+        if (weather?.windSpeed)! < 10.0 {
+            self.windImage?.image = UIImage(named: "905")
+        } else {
+            self.windImage?.image = UIImage(named: "906")
+        }
+        
         self.weatherImageView?.image = UIImage(named: (weather?.icon)!)
-        self.windImage?.image = UIImage(named: "905")
         self.tempLabel?.text = (weather?.temp?.description)! + " \u{00B0}C"
         self.windSpeedLabel?.text = (weather?.windSpeed?.description)! + " m/s"
     }

@@ -41,7 +41,12 @@ class ForecastCell: UITableViewCell {
             self.tempImageView?.image = UIImage(named: "904")
         }
         
-        self.windImageView?.image = UIImage(named: "905")
+        if (weather?.windSpeed)! < 10.0 {
+            self.windImageView?.image = UIImage(named: "905")
+        } else {
+            self.windImageView?.image = UIImage(named: "906")
+        }
+        
         self.tempLabel?.text = (weather?.temp?.description)! + " \u{00B0}C"
         self.windLabel?.text = (weather?.windSpeed?.description)! + " m/s"
         self.mainImageView?.image = UIImage(named: (weather?.icon)!)

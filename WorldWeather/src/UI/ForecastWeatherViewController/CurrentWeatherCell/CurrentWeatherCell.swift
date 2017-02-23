@@ -28,7 +28,12 @@ class CurrentWeatherCell: UITableViewCell {
     func fillWith(weather: Weather?, city: City?) {
         self.cityNameLabel?.text = city?.name
         self.mainImageView?.image = UIImage(named: (weather?.icon)!)
-        self.windImageView?.image = UIImage(named: "905")
+        
+        if (weather?.windSpeed)! < 10.0 {
+            self.windImageView?.image = UIImage(named: "905")
+        } else {
+            self.windImageView?.image = UIImage(named: "906")
+        }
         
         if (weather?.temp)! < 10.0 {
             self.tempImageView?.image = UIImage(named: "903")

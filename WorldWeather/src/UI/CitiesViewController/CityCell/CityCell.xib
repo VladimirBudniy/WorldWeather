@@ -19,10 +19,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYK-lA-WbX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHa-2j-sPt">
+                                <rect key="frame" x="2" y="99" width="316" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="m8p-sy-tBC"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9U-gV-odb">
-                                <rect key="frame" x="8" y="35" width="220" height="55"/>
+                                <rect key="frame" x="8" y="35" width="216" height="54"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="904" translatesAutoresizingMaskIntoConstraints="NO" id="Aqz-F4-Ogp">
                                         <rect key="frame" x="10" y="10" width="40" height="40"/>
@@ -37,26 +44,30 @@
                                             <constraint firstAttribute="width" constant="60" id="Gx6-cE-DHe"/>
                                             <constraint firstAttribute="height" constant="40" id="vmv-M9-yph"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="905" translatesAutoresizingMaskIntoConstraints="NO" id="kkh-hX-MuS">
-                                        <rect key="frame" x="110" y="10" width="40" height="40"/>
+                                        <rect key="frame" x="106" y="9" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="2sV-g0-Fyr"/>
                                             <constraint firstAttribute="height" constant="40" id="Gap-WZ-Q40"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wind" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-pk-pr9">
-                                        <rect key="frame" x="155" y="8" width="60" height="40"/>
+                                        <rect key="frame" x="151" y="7" width="60" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="G6M-ZZ-2fg"/>
                                             <constraint firstAttribute="width" constant="60" id="vJS-23-Cpn"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -72,19 +83,19 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cm-LW-csb">
-                                <rect key="frame" x="10" y="10" width="302" height="20"/>
+                                <rect key="frame" x="40" y="10" width="272" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="CdO-Xk-0lR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                <color key="shadowColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01d" translatesAutoresizingMaskIntoConstraints="NO" id="OZ5-YF-Cki">
-                                <rect key="frame" x="232" y="12" width="80" height="80"/>
+                                <rect key="frame" x="228" y="12" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="OrW-TH-p71"/>
                                     <constraint firstAttribute="width" constant="80" id="VGh-Zr-VDg"/>
@@ -93,7 +104,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0cm-LW-csb" firstAttribute="leading" secondItem="sYK-lA-WbX" secondAttribute="leading" constant="10" id="5gZ-cq-fS3"/>
+                            <constraint firstAttribute="bottom" secondItem="qHa-2j-sPt" secondAttribute="bottom" constant="-1" id="1BB-dh-TAI"/>
+                            <constraint firstItem="0cm-LW-csb" firstAttribute="leading" secondItem="sYK-lA-WbX" secondAttribute="leading" constant="40" id="5gZ-cq-fS3"/>
                             <constraint firstItem="e9U-gV-odb" firstAttribute="top" secondItem="0cm-LW-csb" secondAttribute="bottom" constant="5" id="8WF-lI-9J0"/>
                             <constraint firstItem="OZ5-YF-Cki" firstAttribute="leading" secondItem="e9U-gV-odb" secondAttribute="trailing" constant="4" id="McT-Ei-lKB"/>
                             <constraint firstItem="OZ5-YF-Cki" firstAttribute="top" secondItem="sYK-lA-WbX" secondAttribute="top" constant="12" id="RH8-Jm-RIX"/>
@@ -101,7 +113,9 @@
                             <constraint firstAttribute="bottom" secondItem="e9U-gV-odb" secondAttribute="bottom" constant="10" id="fii-Zt-hkR"/>
                             <constraint firstAttribute="trailing" secondItem="0cm-LW-csb" secondAttribute="trailing" constant="8" id="hDG-0k-LGF"/>
                             <constraint firstItem="0cm-LW-csb" firstAttribute="top" secondItem="sYK-lA-WbX" secondAttribute="top" constant="10" id="jLh-b4-lKm"/>
-                            <constraint firstAttribute="trailing" secondItem="OZ5-YF-Cki" secondAttribute="trailing" constant="8" id="mKB-YC-Wzx"/>
+                            <constraint firstAttribute="trailing" secondItem="OZ5-YF-Cki" secondAttribute="trailing" constant="12" id="mKB-YC-Wzx"/>
+                            <constraint firstItem="qHa-2j-sPt" firstAttribute="leading" secondItem="sYK-lA-WbX" secondAttribute="leading" constant="2" id="nn0-x0-bvG"/>
+                            <constraint firstAttribute="trailing" secondItem="qHa-2j-sPt" secondAttribute="trailing" constant="2" id="wFi-Wx-Iej"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -122,7 +136,7 @@
                 <outlet property="windImage" destination="kkh-hX-MuS" id="hPj-xw-U8p"/>
                 <outlet property="windSpeedLabel" destination="vKD-pk-pr9" id="wLN-5U-MMr"/>
             </connections>
-            <point key="canvasLocation" x="-496" y="-192"/>
+            <point key="canvasLocation" x="-525" y="-192"/>
         </tableViewCell>
     </objects>
     <resources>
