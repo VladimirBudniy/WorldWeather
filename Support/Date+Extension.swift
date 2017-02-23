@@ -11,19 +11,18 @@ import Foundation
 //"MMM d, H:mm"
 
 extension Date {
-    
     static func currentStringDate() -> String? {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: currentDate)
         
         return self.convertDateString(dateString: dateString)
     }
-    
+
     static func convertDateString(dateString: String?) -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: dateString!)
         dateFormatter.dateFormat = "MMM d"
         
@@ -38,6 +37,4 @@ extension Date {
         
         return dateFormatter.string(from: date!)
     }
-    
-    
 }
