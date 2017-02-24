@@ -13,7 +13,7 @@ typealias error = (Error) -> ()
 
 func loadWeather(for city: String?, for user: User, errorBlock: @escaping error) {
     if let city = city {
-        let city = city.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        let city = city.urlEscaped
         let url = URL(string: String.localizedStringWithFormat(Path().loadCityPath, city))
         let request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData)
         let config = URLSessionConfiguration.default

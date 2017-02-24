@@ -11,7 +11,7 @@ import UIKit
 
 func forecastWeather(for city: City?, errorBlock: @escaping error) {
     if let cityId = city?.id {
-        let ID = cityId.description.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        let ID = cityId.description.urlEscaped
         let url = URL(string: String.localizedStringWithFormat(Path().forecastPath, ID))
         let request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData)
         let config = URLSessionConfiguration.default
