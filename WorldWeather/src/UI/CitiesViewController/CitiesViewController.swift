@@ -74,20 +74,27 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     private func showAddCityController() {
         var cityNameTextField = self.rootView.cityTextField
         if self.cities.count <= 15 {
+            
+            let okBlock: (UIAlertAction) -> () = { action in
+                if let cityName = cityNameTextField?.text {
+                    if cityName != "" {
+                        loadWeather(for: cityName,
+                                    for: self.user,
+                                    errorBlock: self.loadError)
+                    }
+                }
+            }
+            
+            let cancelBlock: (UIAlertAction) -> () = { action in
+                self.dismiss(animated: true, completion: nil)
+            }
+            
             let controller = self.alertViewControllerWith(title: "City name",
                                                           message: nil,
                                                           preferredStyle: .alert,
-                                                          actionTitle: "Ok",
+                                                          actionsTitles: ["Cancel", "Ok"],
                                                           style: .default,
-                                                          handler: { action in
-                                                            if let cityName = cityNameTextField?.text {
-                                                                if cityName != "" {
-                                                                    loadWeather(for: cityName,
-                                                                                for: self.user,
-                                                                                errorBlock: self.loadError)
-                                                                }
-                                                            }
-            })
+                                                          handlers:[cancelBlock, okBlock])
             controller.addTextField(configurationHandler: { textField in
                 cityNameTextField = textField
             })

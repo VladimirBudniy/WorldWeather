@@ -33,17 +33,25 @@ public extension AlertViewController {
                                  style: UIAlertActionStyle,
                                  handler:((UIAlertAction) -> Void)?) -> UIAlertController
     {
-        let alertView = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: preferredStyle)
-        
-        let alertAction = UIAlertAction(
-            title: actionTitle,
-            style: style,
-            handler: handler)
-        
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        let alertAction = UIAlertAction(title: actionTitle, style: style, handler: handler)
         alertView.addAction(alertAction)
+        
+        return alertView
+    }
+    
+    func alertViewControllerWith(title: String?,
+                                 message: String?,
+                                 preferredStyle: UIAlertControllerStyle,
+                                 actionsTitles: [String?],
+                                 style: UIAlertActionStyle,
+                                 handlers:[((UIAlertAction) -> Void)?]) -> UIAlertController
+    {
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        let okAction = UIAlertAction(title: actionsTitles[0], style: style, handler: handlers[0])
+        let cancelAction = UIAlertAction(title: actionsTitles[1], style: style, handler: handlers[1])
+        alertView.addAction(okAction)
+        alertView.addAction(cancelAction)
         
         return alertView
     }
