@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 func refreshWeather(in cities: [String]?, for user: User, errorBlock: @escaping error) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
     if let cities = cities {
         let cities = cities.joined(separator: ",").addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: String.localizedStringWithFormat(Path().refreshPath, cities))

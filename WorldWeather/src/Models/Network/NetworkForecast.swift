@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 func forecastWeather(for city: City?, errorBlock: @escaping error) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
     if let cityId = city?.id {
         let ID = cityId.description.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: String.localizedStringWithFormat(Path().forecastPath, ID))

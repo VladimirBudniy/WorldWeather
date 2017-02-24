@@ -30,7 +30,7 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
         super.viewWillAppear(animated)
         forecastWeather(for: self.city, errorBlock: loadError)
     }
-    
+        
     // MARK: - Swipe Gesture Recognizer
 
     @IBAction func popViewController(_ sender: UISwipeGestureRecognizer) {
@@ -74,6 +74,7 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
     // MARK: - Firebase
     
     private func loadFromFirebase() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.city?.ref.child(StringConst().forecastWeather).observe(FIRDataEventType.value, with: { (snapshot) in
             var array = [Weather]()
             for child in snapshot.children {

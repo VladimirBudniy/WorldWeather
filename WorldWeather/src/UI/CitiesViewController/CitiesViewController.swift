@@ -54,8 +54,10 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
         self.loadFromFirebase()
     }
+
     
     // MARK: - NavigationBar Action
     
@@ -125,6 +127,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
         navigationBar?.setBackgroundImage(UIImage(), for: .default)
         navigationBar?.shadowImage = UIImage()
         navigationBar?.isTranslucent = true
+        navigationBar?.tintColor = UIColor.clear
         self.addBarButtons()
     }
     
@@ -160,6 +163,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
             }
         }
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         refreshWeather(in: citiesID, for: self.user, errorBlock: loadError)
         self.tableView?.refreshControl?.endRefreshing()
     }
