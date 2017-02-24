@@ -19,24 +19,25 @@ class CityCell: UITableViewCell {
     @IBOutlet var windSpeedLabel: UILabel?
     
     func fillWith(city: City?) {
+        let cellsConst = CellsStringConst()
+        
         self.cityName?.text = city?.name
         let weather = city?.currentWeather
         
         if (weather?.temp)! < 10.0 {
-            self.tempImageView?.image = UIImage(named: "903")
+            self.tempImageView?.image = UIImage(named: cellsConst.coldImage)
         } else {
-            self.tempImageView?.image = UIImage(named: "904")
+            self.tempImageView?.image = UIImage(named: cellsConst.hotImage)
         }
         
         if (weather?.windSpeed)! < 10.0 {
-            self.windImage?.image = UIImage(named: "905")
+            self.windImage?.image = UIImage(named: cellsConst.lightWindImage)
         } else {
-            self.windImage?.image = UIImage(named: "906")
+            self.windImage?.image = UIImage(named: cellsConst.strongWindImage)
         }
         
         self.weatherImageView?.image = UIImage(named: (weather?.icon)!)
-        self.tempLabel?.text = (weather?.temp?.description)! + " \u{00B0}C"
-        self.windSpeedLabel?.text = (weather?.windSpeed?.description)! + " m/s"
+        self.tempLabel?.text = (weather?.temp?.description)! + cellsConst.celsius
+        self.windSpeedLabel?.text = (weather?.windSpeed?.description)! + cellsConst.windSpeed
     }
-    
 }

@@ -21,7 +21,7 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.settingNavigationBar()
+        self.navigationController?.navigationBar.isHidden = true
         self.settingTableView()
         self.loadFromFirebase()
     }
@@ -31,9 +31,9 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
         forecastWeather(for: self.city, errorBlock: loadError)
     }
     
-    // MARK: - NavigationBar Action
-    
-    @objc private func popViewController() {
+    // MARK: - Swipe Gesture Recognizer
+
+    @IBAction func popViewController(_ sender: UISwipeGestureRecognizer) {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
@@ -59,24 +59,6 @@ class ForecastWeatherViewController: UIViewController, ViewControllerRootView, A
         tableView.rowHeight = (cell?.contentView.frame.size.height)!
         
         return cell
-    }
-    
-    private func settingNavigationBar() {
-        let navigationBar = self.navigationController?.navigationBar
-        navigationBar?.isHidden = false
-        navigationBar?.setBackgroundImage(UIImage(), for: .default)
-        navigationBar?.shadowImage = UIImage()
-        navigationBar?.isTranslucent = true
-        self.addBarButtons()
-    }
-    
-    private func addBarButtons() {
-        let names = NavigationBarButtonName()
-        let leftImage = UIImage(named: names.leftButton)?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: leftImage,
-                                                                style: .plain,
-                                                                target: self,
-                                                                action: #selector(popViewController))
     }
     
     private func loadError(error: Error) {

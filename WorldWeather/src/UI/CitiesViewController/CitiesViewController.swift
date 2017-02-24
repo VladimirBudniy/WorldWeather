@@ -60,15 +60,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     // MARK: - NavigationBar Action
     
     @objc private func addCity() {
-        if self.cities.count <= 15 {
-            let text = self.rootView.cityTextField?.text
-            if text != "" {
-                loadWeather(for: text, for: self.user, errorBlock: loadError)
-                self.rootView.cityTextField?.text = ""
-            }
-        }else {
-            self.showAlertController(message: AlertControllerConst().citiesQty)
-        }
+        self.showAddCityController()
     }
     
     @objc private func popViewController() {
@@ -77,6 +69,32 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
     
     // MARK: - Private
     
+    private func showAddCityController() {
+        var cityNameTextField = self.rootView.cityTextField
+        if self.cities.count <= 15 {
+            let controller = self.alertViewControllerWith(title: "City name",
+                                                          message: nil,
+                                                          preferredStyle: .alert,
+                                                          actionTitle: "Ok",
+                                                          style: .default,
+                                                          handler: { action in
+                                                            if let cityName = cityNameTextField?.text {
+                                                                if cityName != "" {
+                                                                    loadWeather(for: cityName,
+                                                                                for: self.user,
+                                                                                errorBlock: self.loadError)
+                                                                }
+                                                            }
+            })
+            controller.addTextField(configurationHandler: { textField in
+                cityNameTextField = textField
+            })
+            self.present(controller, animated: true, completion: nil)
+        } else {
+            self.showAlertController(message: AlertControllerConst().citiesQty)
+        }
+    }
+
     private func loadError(error: Error) {
         self.tableView?.refreshControl?.endRefreshing()
         let message = error.localizedDescription
@@ -161,7 +179,7 @@ class CitiesViewController: UIViewController, ViewControllerRootView, UITableVie
             let ref = self.ref.child(login!)
             ref.setValue(user, withCompletionBlock: { success in
                 if let error = success.0 {
-                    print(" CitiesViewController - Error - %@", error)
+                    print("CitiesViewController - Error - %@", error)
                 }
             })
         }

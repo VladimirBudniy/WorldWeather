@@ -29,7 +29,8 @@ func loadWeather(for city: String?, for user: User, errorBlock: @escaping error)
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String: Any]
                     let name = json?[StringConst().name] as? String
-                    if city != name {
+                    let cityName = city.replacingOccurrences(of: "%20", with: " ")
+                    if cityName != name {
                         let error = NSError(domain: AlertControllerConst().cityNotFound, code: 502)
                         DispatchQueue.main.async {
                             errorBlock(error)

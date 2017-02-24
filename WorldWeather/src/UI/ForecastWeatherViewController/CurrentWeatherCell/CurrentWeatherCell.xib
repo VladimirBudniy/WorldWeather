@@ -36,7 +36,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKJ-Bo-o7R">
-                                <rect key="frame" x="8" y="20" width="294" height="30"/>
+                                <rect key="frame" x="8" y="15" width="294" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="MZU-Cj-xi0"/>
                                 </constraints>
@@ -200,7 +200,7 @@
                             <constraint firstItem="2Cw-kW-A1m" firstAttribute="top" secondItem="27z-k0-P51" secondAttribute="bottom" constant="23" id="FoS-hj-w0P"/>
                             <constraint firstItem="XJR-60-hBw" firstAttribute="leading" secondItem="AlT-JD-Bn6" secondAttribute="leading" constant="8" id="JZj-ND-1Jb"/>
                             <constraint firstItem="XGR-xI-MND" firstAttribute="leading" secondItem="27z-k0-P51" secondAttribute="trailing" constant="5" id="Jwi-24-w9E"/>
-                            <constraint firstItem="wKJ-Bo-o7R" firstAttribute="top" secondItem="AlT-JD-Bn6" secondAttribute="top" constant="20" id="MmG-cf-3FO"/>
+                            <constraint firstItem="wKJ-Bo-o7R" firstAttribute="top" secondItem="AlT-JD-Bn6" secondAttribute="top" constant="15" id="MmG-cf-3FO"/>
                             <constraint firstItem="Ruj-FG-jAg" firstAttribute="centerX" secondItem="wKJ-Bo-o7R" secondAttribute="centerX" id="Plt-Ae-d0F"/>
                             <constraint firstItem="pGo-Ap-8Zo" firstAttribute="leading" secondItem="dfx-cE-87X" secondAttribute="trailing" id="Yzb-aT-yZo"/>
                             <constraint firstItem="2Cw-kW-A1m" firstAttribute="top" secondItem="XGR-xI-MND" secondAttribute="bottom" constant="33" id="Zku-Yw-Vvm"/>

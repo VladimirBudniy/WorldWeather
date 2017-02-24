@@ -15,7 +15,9 @@ class CitiesView: UIView, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.cityTextField = UITextField()
         self.cityTextField?.delegate = self
+        self.tableView?.contentInset.top = 60
     }
     
     // MARK: - UITextFieldDelegate Protocol Reference

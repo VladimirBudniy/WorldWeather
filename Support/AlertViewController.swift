@@ -19,14 +19,19 @@ public extension AlertViewController {
         let alertView = self.alertViewControllerWith(title: nil,
                                                      message: "Data is not saved!",
                                                      preferredStyle: UIAlertControllerStyle.alert,
-                                                     actionTitle: "Yes",
+                                                     actionTitle: "Ok",
                                                      style: UIAlertActionStyle.default,
                                                      handler: nil)
         
         return alertView
     }
     
-    func alertViewControllerWith(title: String?, message: String, preferredStyle: UIAlertControllerStyle, actionTitle: String, style: UIAlertActionStyle, handler:((UIAlertAction) -> Void)?) -> UIAlertController
+    func alertViewControllerWith(title: String?,
+                                 message: String?,
+                                 preferredStyle: UIAlertControllerStyle,
+                                 actionTitle: String?,
+                                 style: UIAlertActionStyle,
+                                 handler:((UIAlertAction) -> Void)?) -> UIAlertController
     {
         let alertView = UIAlertController(
             title: title,

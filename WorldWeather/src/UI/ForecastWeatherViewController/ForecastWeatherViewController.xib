@@ -32,6 +32,7 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="Sdm-rd-ejU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5WX-t7-Upx"/>
                 <constraint firstAttribute="bottom" secondItem="QI7-dS-o3j" secondAttribute="bottom" id="7B2-nl-90I"/>
@@ -44,9 +45,16 @@
             </constraints>
             <connections>
                 <outlet property="tableView" destination="QI7-dS-o3j" id="7Wm-g7-vAz"/>
+                <outletCollection property="gestureRecognizers" destination="nPl-ny-S2M" appends="YES" id="3dq-bB-kso"/>
             </connections>
-            <point key="canvasLocation" x="-166" y="42"/>
+            <point key="canvasLocation" x="-308" y="-131"/>
         </view>
+        <swipeGestureRecognizer direction="right" id="nPl-ny-S2M">
+            <connections>
+                <action selector="popViewController:" destination="-1" id="BKl-jN-wOJ"/>
+                <outlet property="delegate" destination="-1" id="rMu-n1-mlI"/>
+            </connections>
+        </swipeGestureRecognizer>
     </objects>
     <resources>
         <image name="BackgroundImage" width="540" height="960"/>

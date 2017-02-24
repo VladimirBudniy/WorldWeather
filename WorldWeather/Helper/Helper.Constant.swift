@@ -36,6 +36,16 @@ struct TextFieldConst {
     let cleanField = ""
 }
 
+struct CellsStringConst {
+    let celsius = " \u{00B0}C"
+    let coldImage = "903"
+    let hotImage = "904"
+    let lightWindImage = "905"
+    let strongWindImage = "906"
+    let windSpeed = " m/s"
+    let pressure = " mb"
+}
+
 struct StringConst {
     let login = "login"
     let password = "password"

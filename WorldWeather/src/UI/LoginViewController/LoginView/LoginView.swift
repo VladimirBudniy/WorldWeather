@@ -48,5 +48,4 @@ class LoginView: UIView {
         button?.isEnabled = true
         button?.alpha = 1
     }
-    
 }

@@ -26,26 +26,28 @@ class CurrentWeatherCell: UITableViewCell {
     }
 
     func fillWith(weather: Weather?, city: City?) {
+        let cellsConst = CellsStringConst()
+        
         self.cityNameLabel?.text = city?.name
         self.mainImageView?.image = UIImage(named: (weather?.icon)!)
         
         if (weather?.windSpeed)! < 10.0 {
-            self.windImageView?.image = UIImage(named: "905")
+            self.windImageView?.image = UIImage(named: cellsConst.lightWindImage)
         } else {
-            self.windImageView?.image = UIImage(named: "906")
+            self.windImageView?.image = UIImage(named: cellsConst.strongWindImage)
         }
         
         if (weather?.temp)! < 10.0 {
-            self.tempImageView?.image = UIImage(named: "903")
+            self.tempImageView?.image = UIImage(named: cellsConst.coldImage)
         } else {
-            self.tempImageView?.image = UIImage(named: "904")
+            self.tempImageView?.image = UIImage(named: cellsConst.hotImage)
         }
         
-        self.tempLabel?.text = (weather?.temp?.description)! + " \u{00B0}C"
-        self.tempMinLabel?.text = (weather?.temp_min?.description)! + " \u{00B0}C"
-        self.tempMaxLabel?.text = (weather?.temp_max?.description)! + " \u{00B0}C"
-        self.windLabel?.text = (weather?.windSpeed?.description)! + " m/s"
+        self.tempLabel?.text = (weather?.temp?.description)! + cellsConst.celsius
+        self.tempMinLabel?.text = (weather?.temp_min?.description)! + cellsConst.celsius
+        self.tempMaxLabel?.text = (weather?.temp_max?.description)! + cellsConst.celsius
+        self.windLabel?.text = (weather?.windSpeed?.description)! + cellsConst.windSpeed
         self.dateLabel?.text = Date.currentStringDate()
-        self.pressureLabel?.text = (weather?.pressure?.description)! + " mb"
+        self.pressureLabel?.text = (weather?.pressure?.description)! + cellsConst.pressure
     }
 }
