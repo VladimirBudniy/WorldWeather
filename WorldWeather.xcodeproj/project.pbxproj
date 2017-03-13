@@ -356,6 +356,7 @@
 				TargetAttributes = {
 					CFA3CB9D1E52FF0C004618E3 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = K33J7AD8C7;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -588,10 +589,11 @@
 			baseConfigurationReference = 728D905B3D3F45A024E134B9 /* Pods-WorldWeather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K33J7AD8C7;
 				INFOPLIST_FILE = WorldWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = VB.WorldWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.idapgroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -602,10 +604,11 @@
 			baseConfigurationReference = FC2C0D5503EBB5C50EEEB1AB /* Pods-WorldWeather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K33J7AD8C7;
 				INFOPLIST_FILE = WorldWeather/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = VB.WorldWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.idapgroup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
